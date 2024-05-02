@@ -25,5 +25,13 @@ void freeMemMatrix(matrix *m);
 
 void freeMemMatrices(matrix *ms, int nMatrices);
 
+void inputMatrix(matrix *m);
+
+void outputMatrix(matrix m);
+
+void inputMatrices(matrix *ms, int nMatrices);
+
+void outputMatrices(matrix *ms, int nMatrices);
+
 
 #endif
