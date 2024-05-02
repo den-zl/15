@@ -1,0 +1,8 @@
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/CMakeFiles/lab_15.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/libs/CMakeFiles/edit_cache.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/libs/CMakeFiles/rebuild_cache.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/libs/data_structures/CMakeFiles/data_structures.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/libs/data_structures/CMakeFiles/edit_cache.dir
+/Users/denzl/CLionProjects/2sem/19.15/lab_15/cmake-build-debug/libs/data_structures/CMakeFiles/rebuild_cache.dir
