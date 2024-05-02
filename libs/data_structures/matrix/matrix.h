@@ -33,5 +33,8 @@ void inputMatrices(matrix *ms, int nMatrices);
 
 void outputMatrices(matrix *ms, int nMatrices);
 
+void swapRows(matrix m, int i1, int i2);
+
+void swapColumns(matrix m, int j1, int j2);
 
 #endif
