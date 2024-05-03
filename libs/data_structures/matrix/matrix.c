@@ -50,15 +50,15 @@ void selectionSortBySumCols(int *a, matrix *m) {
 
 
 matrix getMemMatrix(int nRows, int nCols) {
-    int **values = (int **) malloc(sizeof(int*) * nRows);
+    int **values = (int **) malloc(sizeof(int *) * nRows);
     for (int i = 0; i < nRows; i++)
         values[i] = (int *) malloc(sizeof(int) * nCols);
-    return (matrix){values, nRows, nCols};
+    return (matrix) {values, nRows, nCols};
 }
 
 
 matrix *getMemArrayOfMatrices(int nMatrices, int nRows, int nCols) {
-    matrix *ms = (matrix*) malloc(sizeof(matrix) * nMatrices);
+    matrix *ms = (matrix *) malloc(sizeof(matrix) * nMatrices);
     for (int i = 0; i < nMatrices; i++)
         ms[i] = getMemMatrix(nRows, nCols);
     return ms;
@@ -66,7 +66,7 @@ matrix *getMemArrayOfMatrices(int nMatrices, int nRows, int nCols) {
 
 
 void freeMemMatrix(matrix *m) {
-    for(int i = 0; i < m->nRows; i++) {
+    for (int i = 0; i < m->nRows; i++) {
         free(m->values[i]);
     }
 
@@ -86,9 +86,9 @@ void freeMemMatrices(matrix *ms, int nMatrices) {
 
 
 void inputMatrix(matrix *m) {
-    for(int i = 0; i < m->nRows; i++) {
+    for (int i = 0; i < m->nRows; i++) {
         int *row = m->values[i];
-        for(int j = 0; j < m->nCols; j++) {
+        for (int j = 0; j < m->nCols; j++) {
             scanf("%d", &row[j]);
         }
     }
@@ -170,7 +170,7 @@ int getSumCol(int **values, int nRows, int n) {
     return sum;
 }
 
-void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int*, int)) {
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int)) {
     int arr[m.nRows];
 
     for (int i = 0; i < m.nRows; i++) {
@@ -287,8 +287,8 @@ void transposeMatrix(matrix *m) {
     matrix m_new = getMemMatrix(m->nCols, m->nRows);
 
     for (int i = 0; i < m->nRows; i++) {
-        for (int j = i; j < m->nCols; j++) {
-            m_new.values[i][j] = m->values[j][i];
+        for (int j = 0; j < m->nCols; j++) {
+            m_new.values[j][i] = m->values[i][j];
         }
     }
 
@@ -302,7 +302,7 @@ position getMinValuePos(matrix m) {
 
     int min = INT_MAX;
     for (int i = 0; i < m.nRows; i++) {
-        for (int j = i; j < m.nCols; j++) {
+        for (int j = 0; j < m.nCols; j++) {
             if (m.values[i][j] < min) {
                 min = m.values[i][j];
                 pos.rowIndex = i;
@@ -319,7 +319,7 @@ position getMaxValuePos(matrix m) {
 
     int max = INT_MIN;
     for (int i = 0; i < m.nRows; i++) {
-        for (int j = i; j < m.nCols; j++) {
+        for (int j = 0; j < m.nCols; j++) {
             if (m.values[i][j] > max) {
                 max = m.values[i][j];
                 pos.rowIndex = i;
@@ -328,4 +328,26 @@ position getMaxValuePos(matrix m) {
         }
     }
     return pos;
+}
+
+matrix createMatrixFromArray(const int *a, size_t nRows, size_t nCols) {
+
+    matrix m = getMemMatrix(nRows, nCols);
+    int k = 0;
+    for (int i = 0; i < nRows; i++) {
+        for (int j = 0; j < nCols; j++) {
+            m.values[i][j] = a[k++];
+        }
+    }
+    return m;
+}
+
+matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols) {
+    matrix *ms = getMemArrayOfMatrices(nMatrices, nRows, nCols);
+    int l = 0;
+    for (size_t k = 0; k < nMatrices; k++)
+        for (size_t i = 0; i < nRows; i++)
+            for (size_t j = 0; j < nCols; j++)
+                ms[k].values[i][j] = values[l++];
+    return ms;
 }
