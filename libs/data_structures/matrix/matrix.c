@@ -5,10 +5,13 @@
 #include "matrix.h"
 
 
-void swap(int *a, int *b, matrix *m, int col1, int col2) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
+}
+void swap_matrix(int *a, int *b, matrix *m, int col1, int col2) {
+    swap(a, b);
 
     for (int i = 0; i < m->nRows; i++) {
         int *row = m->values[i];
@@ -40,7 +43,7 @@ void selectionSortBySumCols(int *a, matrix *m) {
         for (int j = i + 1; j < m->nCols; j++)
             if (a[j] < a[minPos])
                 minPos = j;
-        swap(&a[i], &a[minPos], m, i, minPos);
+        swap_matrix(&a[i], &a[minPos], m, i, minPos);
     }
 }
 
@@ -263,4 +266,31 @@ bool isSymmetricMatrix(matrix *m) {
         }
     }
     return true;
+}
+
+void transposeSquareMatrix(matrix *m) {
+    if (m->nRows != m->nCols) {
+        return;
+    }
+
+    for (int i = 0; i < m->nRows; i++) {
+        for (int j = i; j < m->nCols; j++) {
+            if (i != j) {
+                swap(&m->values[i][j], &m->values[j][i]);
+            }
+        }
+    }
+}
+
+void transposeMatrix(matrix *m) {
+    matrix m_new = getMemMatrix(m->nCols, m->nRows);
+
+    for (int i = 0; i < m->nRows; i++) {
+        for (int j = i; j < m->nCols; j++) {
+            m_new.values[i][j] = m->values[j][i];
+        }
+    }
+
+    freeMemMatrix(m);
+    *m = m_new;
 }
