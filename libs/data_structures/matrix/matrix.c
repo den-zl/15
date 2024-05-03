@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "matrix.h"
 
 
@@ -197,4 +198,69 @@ void selectionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int*, int)) 
         printf("\n");
     }
     selectionSortBySumCols(arr, &m);
+}
+
+
+bool isSquareMatrix(matrix *m) {
+    return m->nRows == m->nCols;
+}
+
+bool areTwoMatricesEqual(matrix *m1, matrix *m2) {
+    if (m1->nRows != m2->nRows) {
+        return false;
+    }
+    if (m1->nCols != m2->nCols) {
+        return false;
+    }
+
+    for (int i = 0; i < m1->nRows; i++) {
+        int *row1 = m1->values[i];
+        int *row2 = m2->values[i];
+
+        int res = memcmp(row1, row2, sizeof(int) * m1->nCols);
+
+        if (res) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+bool isEMatrix(matrix *m) {
+    if (m->nRows != m->nCols) {
+        return false;
+    }
+    for (int i = 0; i < m->nRows; i++) {
+        int *row = m->values[i];
+        for (int j = 0; j < m->nCols; j++) {
+            if (i == j) {
+                if(row[j] != 1) {
+                    return false;
+                }
+            } else {
+                if(row[j] != 0) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+
+}
+
+
+bool isSymmetricMatrix(matrix *m) {
+    if (m->nRows != m->nCols) {
+        return false;
+    }
+
+    for (int i = 0; i < m->nRows; i++) {
+        for (int j = 0; j < m->nCols; j++) {
+            if (m->values[i][j] != m->values[j][i]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
